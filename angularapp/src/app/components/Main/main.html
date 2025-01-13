@@ -1,0 +1,53 @@
+<h1 id="tableLabel">Shorten URL Convertor</h1>
+
+<p><a routerLink="/auth" routerLinkActive="active">Auth</a></p>
+<p *ngIf="!urls"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+<button (click)="loadUrls()">Load URLs</button>
+<div *ngIf="userRole==1"><button (click)="deleteAllUrl()">Delete All URLs</button></div>
+
+<table *ngIf="urls">
+  <thead>
+    <tr>
+      <th>Full URL</th>
+      <th>Short URL</th>
+      <th>Created By ID</th>
+      <th>CreatedDate</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<div *ngFor="let url of urls">
+  {{ url.fullUrl }}
+  {{ url.shortUrl }}
+  <div *ngIf="checkUserPolicy(url.userId)">
+    <button (click)="deleteUrl(url.id)">Delete</button>
+    <button (click)="getUrl(url)" routerLink="/info" routerLinkActive="active">More info</button>
+  </div>
+</div>
+<br />
+<div *ngIf="user">
+  <h3>Add URL</h3>
+  <form (submit)="AddUrl()">
+
+    <label for="fullUrl">Full URL:</label>
+    <input id="fullUrl" [(ngModel)]="currentUrl.fullUrl" name="fullUrl" type="text" />
+
+    <button type="submit">
+      Submit
+    </button>
+  </form>
+</div>
+<br />
+<br />
+<br />
+
+
+<div *ngIf="user">
+  {{user.id}}
+  {{user.login}}
+  {{user.password}}
+  <p *ngFor="let url of user.shortenerUrls">
+    {{ url.fullUrl }}
+  </p>
+</div>

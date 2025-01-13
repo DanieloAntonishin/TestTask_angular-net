@@ -1,0 +1,13 @@
+<p>Authentication</p>
+<form (submit)="Authentication()">
+
+  <label for="Login">Login:</label>
+  <input id="login" [(ngModel)]="currentUser.Login" name="Login" type="text" />
+  <br />
+  <label for="password">Password:</label>
+  <input id="password" [(ngModel)]="currentUser.Password" name="Password" type="text" />
+
+  <button type="submit">
+    Enter
+  </button>
+</form>
